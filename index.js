@@ -28,7 +28,8 @@ app.post('/contact-me', function(req,res) {
     email   : ${email}, 
     phone   : ${phone}, 
     subject : ${subject}, 
-    message : ${message}`)
+    message : ${message}
+    `)
 });
 
 app.get('/add-projek', function(req,res) {
@@ -76,7 +77,8 @@ app.post('/add-projek', function(req,res) {
     duration     : ${month} bulan,
     desc         : ${desc}, 
     technologies : ${techicon}, 
-    image        : ${image}`)
+    image        : ${image}
+    `)
 });
 
 app.get('/project/:id', function(req,res) {
