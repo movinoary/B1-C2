@@ -79,13 +79,14 @@
     <div class="projek-card" style="background-color: #faf8f8; width: 100%; height: 100%; padding: 8.5%;">
         <h1 style="text-align: center; margin: 1rem 0; font-weight: bold; text-transform: uppercase;">My Project</h1>
         <div class="d-flex justify-content-start flex-wrap">
+            {{#each project}}
             <div class="card rounded-3" style="width: 400px; height: 100%; padding: 0.5rem; margin: 1rem 1.3rem;">
                 <img class="rounded-3" src="https://images.unsplash.com/photo-1480694313141-fce5e697ee25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="project" width="100%" height="90%">
                 <div class="card-body">
-                    <a href="project/1" style="text-decoration: none; color: #151515;">
-                        <h6 class="card-title">Dumbways Mobile App - 2021</h6>
-                        <p style="font-size: 0.8rem; color: #5a5a5a;">Durasi : 3 Bulan</p>
-                        <p class="card-text" style="font-size: 1rem; text-align: justify;">Lorem ipsum dolor sit amet.Lorem ipsum, dolor sit amet consectetur adipisicing elit. A, tempora?</p>
+                    <a href="/project/{{@index}}" style="text-decoration: none; color: #151515;">
+                        <h6 class="card-title">{{this.name}}</h6>
+                        <p style="font-size: 0.8rem; color: #5a5a5a;">Durasi :{{this.month}} bulan</p>
+                        <p class="card-text" style="font-size: 1rem; text-align: justify;">{{this.desc}}</p>
                         <div class="d-flex fs-2">
                             <i style="margin-right: 13px;" class="fa-brands fa-react"></i> 
                             <i style="margin-right: 13px;" class="fa-brands fa-js-square"></i>
@@ -93,87 +94,16 @@
                         </div>
                     </a>
                     <div class="d-flex" style="margin-top: 1rem;">
-                        <button type="button" class="btn btn-dark w-100 m-1">edit</button>
-                        <button type="button" class="btn btn-dark w-100 m-1">delete</button>
+                        <button type="button" class="btn btn-dark w-100 m-1">
+                            <a href="/edit-projek/{{@index}}">edit</a>
+                            </button>
+                        <button type="button" class="btn btn-dark w-100 m-1">
+                            <a href="/delete-projek/{{@index}}">delete</a>
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="card rounded-3" style="width: 400px; height: 100%; padding: 0.5rem; margin: 1rem 1.3rem;">
-                <img class="rounded-3" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="project" width="100%" height="90%">
-                <div class="card-body">
-                    <a href="project/2" style="text-decoration: none; color: #151515;">
-                        <h6 class="card-title">Dumbways Mobile App - 2021</h6>
-                        <p style="font-size: 0.8rem; color: #5a5a5a;">Durasi : 3 Bulan</p>
-                        <p class="card-text" style="font-size: 1rem; text-align: justify;">Lorem ipsum dolor sit amet.Lorem ipsum, dolor sit amet consectetur adipisicing elit. A, tempora?</p>
-                        <div class="d-flex fs-2">
-                            <i style="margin-right: 13px;" class="fa-brands fa-react"></i> 
-                            <i style="margin-right: 13px;" class="fa-brands fa-js-square"></i>
-                            <i style="margin-right: 13px;" class="fa-brands fa-node-js"></i>
-                        </div>
-                    </a>
-                    <div class="d-flex" style="margin-top: 1rem;">
-                        <button type="button" class="btn btn-dark w-100 m-1">edit</button>
-                        <button type="button" class="btn btn-dark w-100 m-1">delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card rounded-3" style="width: 400px; height: 100%; padding: 0.5rem; margin: 1rem 1.3rem;">
-                <img class="rounded-3" src="https://images.unsplash.com/photo-1521106047354-5a5b85e819ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="project" width="100%" height="90%">
-                <div class="card-body">
-                    <a href="project/3" style="text-decoration: none; color: #151515;">
-                        <h6 class="card-title">Dumbways Mobile App - 2021</h6>
-                        <p style="font-size: 0.8rem; color: #5a5a5a;">Durasi : 3 Bulan</p>
-                        <p class="card-text" style="font-size: 1rem; text-align: justify;">Lorem ipsum dolor sit amet.Lorem ipsum, dolor sit amet consectetur adipisicing elit. A, tempora?</p>
-                        <div class="d-flex fs-2">
-                            <i style="margin-right: 13px;" class="fa-brands fa-react"></i> 
-                            <i style="margin-right: 13px;" class="fa-brands fa-js-square"></i>
-                            <i style="margin-right: 13px;" class="fa-brands fa-node-js"></i>
-                        </div>
-                    </a>
-                    <div class="d-flex" style="margin-top: 1rem;">
-                        <button type="button" class="btn btn-dark w-100 m-1">edit</button>
-                        <button type="button" class="btn btn-dark w-100 m-1">delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card rounded-3" style="width: 400px; height: 100%; padding: 0.5rem; margin: 1rem 1.3rem;">
-                <img class="rounded-3" src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="project" width="100%" height="90%">
-                <div class="card-body">
-                    <a href="project/4" style="text-decoration: none; color: #151515;">
-                        <h6 class="card-title">Dumbways Mobile App - 2021</h6>
-                        <p style="font-size: 0.8rem; color: #5a5a5a;">Durasi : 3 Bulan</p>
-                        <p class="card-text" style="font-size: 1rem; text-align: justify;">Lorem ipsum dolor sit amet.Lorem ipsum, dolor sit amet consectetur adipisicing elit. A, tempora?</p>
-                        <div class="d-flex fs-2">
-                            <i style="margin-right: 13px;" class="fa-brands fa-react"></i> 
-                            <i style="margin-right: 13px;" class="fa-brands fa-js-square"></i>
-                            <i style="margin-right: 13px;" class="fa-brands fa-node-js"></i>
-                        </div>
-                    </a>
-                    <div class="d-flex" style="margin-top: 1rem;">
-                        <button type="button" class="btn btn-dark w-100 m-1">edit</button>
-                        <button type="button" class="btn btn-dark w-100 m-1">delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card rounded-3" style="width: 400px; height: 100%; padding: 0.5rem; margin: 1rem 1.3rem;">
-                <img class="rounded-3" src="https://images.unsplash.com/photo-1523726491678-bf852e717f6a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="project" width="100%" height="90%">
-                <div class="card-body">
-                    <a href="project/5" style="text-decoration: none; color: #151515;">
-                        <h6 class="card-title">Dumbways Mobile App - 2021</h6>
-                        <p style="font-size: 0.8rem; color: #5a5a5a;">Durasi : 3 Bulan</p>
-                        <p class="card-text" style="font-size: 1rem; text-align: justify;">Lorem ipsum dolor sit amet.Lorem ipsum, dolor sit amet consectetur adipisicing elit. A, tempora?</p>
-                        <div class="d-flex fs-2">
-                            <i style="margin-right: 13px;" class="fa-brands fa-react"></i> 
-                            <i style="margin-right: 13px;" class="fa-brands fa-js-square"></i>
-                            <i style="margin-right: 13px;" class="fa-brands fa-node-js"></i>
-                        </div>
-                    </a>
-                    <div class="d-flex" style="margin-top: 1rem;">
-                        <button type="button" class="btn btn-dark w-100 m-1">edit</button>
-                        <button type="button" class="btn btn-dark w-100 m-1">delete</button>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
     </div>
     <!-- End Card Projek -->

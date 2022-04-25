@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add project</title>
+    <!-- Link Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Link Icon Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Link Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Start NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed w-100" style="z-index: 5;" >
+        <div class="container">
+          <a class="navbar-brand" href="/">
+              <img src="https://dumbways.id/assets/images/brandred.png" alt="logo" style="width: 50px; width: 50px">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/add-projek">Add Project</a>
+              </li>
+            </ul>
+            <div class="d-flex justify-content-end">
+                <a href="/contact-me" style="
+                    text-decoration: none;
+                    color: #fff;
+                    background-color: #151515;
+                    padding: 5px 15px;
+                    border-radius: 7px;
+                ">contact Me</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+    <!-- End NavBar -->
+
+    <!-- Start Contact Me -->
+    <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; height: 100vh; background-color: #e6e6e6; padding: 7%;">
+        <h1 style="text-align: center; margin: 1rem 0; font-weight: bold; text-transform: uppercase;">Edit my project</h1>
+        {{#each myProjek}}
+        <form class="d-flex flex-column justify-content-center w-50" method="post">
+            <div class="mb-3">
+              <lable style="font-weight: bold;" for="name" class="form-label">Project Name</lable>
+              <input type="text" class="form-control" id="name" name="name" value={{this.name}}>
+            </div>
+            <div class="mb-3 d-flex">
+                <div class="w-100" style="margin-right: 10px;">
+                    <label style="font-weight: bold;" for="startdate" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="startdate" name="startdate" value={{this.startDate}}>
+                </div>
+                <div class="w-100" style="margin-left: 10px;">
+                    <label style="font-weight: bold;" for="enddate" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="enddate" name="enddate" value={{this.endDate}}>
+                </div>
+            </div>
+            <div class="mb-3">
+              <label style="font-weight: bold;" for="description" class="form-label">Description</label>
+              <textarea class="form-control" id="description" rows="3" style="resize: none;" name="desc">{{this.desc}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label style="font-weight: bold;" for="technologies" class="form-label">Technologies</label>
+                <div class="d-flex">
+                    <div class="form-check form-check-inline w-50">
+                      <input class="form-check-input" type="checkbox" id="nodejs" value="Node Js" name="techicon">
+                      <label style="font-weight: bold;" class="form-check-label" for="nodejs">Node JS</label>
+                    </div>
+                    <div class="form-check form-check-inline w-50">
+                      <input class="form-check-input" type="checkbox" id="nextjs" value="Next JS" name="techicon">
+                      <label style="font-weight: bold;" class="form-check-label" for="nextjs">Next JS</label>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="form-check form-check-inline w-50">
+                      <input class="form-check-input" type="checkbox" id="ReactJs" value="React Js" name="techicon">
+                      <label style="font-weight: bold;" class="form-check-label" for="ReactJs">React Js</label>
+                    </div>
+                    <div class="form-check form-check-inline w-50">
+                      <input class="form-check-input" type="checkbox" id="typescript" value="TypeScript" name="techicon">
+                      <label style="font-weight: bold;" class="form-check-label" for="typescript">TypeScript</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+              <label style="font-weight: bold;" for="image" class="form-label">Upload Image</label>
+              <input class="form-control" type="file" id="imgae" name="image">
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-dark rounded-pill w-25">submit</button>
+            </div>
+        </form>
+        {{/each}}
+    </div>
+    <!-- End Contact Me -->
+</body>
+</html>
