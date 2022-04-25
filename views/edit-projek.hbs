@@ -46,54 +46,54 @@
     <!-- End NavBar -->
 
     <!-- Start Contact Me -->
-    <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; height: 100vh; background-color: #e6e6e6; padding: 7%;">
-        <h1 style="text-align: center; margin: 1rem 0; font-weight: bold; text-transform: uppercase;">Edit my project</h1>
+    <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; height: 100%; background-color: #e6e6e6; padding: 7%;">
         {{#each myProjek}}
+        <h1 style="text-align: center; margin: 1rem 0; font-weight: bold; text-transform: uppercase;">Edit my project</h1>
         <form class="d-flex flex-column justify-content-center w-50" method="post">
             <div class="mb-3">
               <lable style="font-weight: bold;" for="name" class="form-label">Project Name</lable>
-              <input type="text" class="form-control" id="name" name="name" value={{this.name}}>
+              <input type="text" class="form-control" id="name" name="nameEdit" value={{this.name}}>
             </div>
             <div class="mb-3 d-flex">
                 <div class="w-100" style="margin-right: 10px;">
                     <label style="font-weight: bold;" for="startdate" class="form-label">Start Date</label>
-                    <input type="date" class="form-control" id="startdate" name="startdate" value={{this.startDate}}>
+                    <input type="date" class="form-control" id="startdate" name="startdateEdit" value={{this.startDate}}>
                 </div>
                 <div class="w-100" style="margin-left: 10px;">
                     <label style="font-weight: bold;" for="enddate" class="form-label">End Date</label>
-                    <input type="date" class="form-control" id="enddate" name="enddate" value={{this.endDate}}>
+                    <input type="date" class="form-control" id="enddate" name="enddateEdit" value={{this.endDate}}>
                 </div>
             </div>
             <div class="mb-3">
               <label style="font-weight: bold;" for="description" class="form-label">Description</label>
-              <textarea class="form-control" id="description" rows="3" style="resize: none;" name="desc">{{this.desc}}</textarea>
+              <textarea class="form-control" id="description" rows="3" style="resize: none;" name="descEdit">{{this.desc}}</textarea>
             </div>
             <div class="mb-3">
                 <label style="font-weight: bold;" for="technologies" class="form-label">Technologies</label>
                 <div class="d-flex">
                     <div class="form-check form-check-inline w-50">
-                      <input class="form-check-input" type="checkbox" id="nodejs" value="Node Js" name="techicon">
+                      <input class="form-check-input" type="checkbox" id="nodejs" value="Node Js" name="techiconEdit">
                       <label style="font-weight: bold;" class="form-check-label" for="nodejs">Node JS</label>
                     </div>
                     <div class="form-check form-check-inline w-50">
-                      <input class="form-check-input" type="checkbox" id="nextjs" value="Next JS" name="techicon">
+                      <input class="form-check-input" type="checkbox" id="nextjs" value="Next JS" name="techiconEdit">
                       <label style="font-weight: bold;" class="form-check-label" for="nextjs">Next JS</label>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="form-check form-check-inline w-50">
-                      <input class="form-check-input" type="checkbox" id="ReactJs" value="React Js" name="techicon">
+                      <input class="form-check-input" type="checkbox" id="ReactJs" value="React Js" name="techiconEdit">
                       <label style="font-weight: bold;" class="form-check-label" for="ReactJs">React Js</label>
                     </div>
                     <div class="form-check form-check-inline w-50">
-                      <input class="form-check-input" type="checkbox" id="typescript" value="TypeScript" name="techicon">
+                      <input class="form-check-input" type="checkbox" id="typescript" value="TypeScript" name="techiconEdit">
                       <label style="font-weight: bold;" class="form-check-label" for="typescript">TypeScript</label>
                     </div>
                 </div>
             </div>
             <div class="mb-3">
               <label style="font-weight: bold;" for="image" class="form-label">Upload Image</label>
-              <input class="form-control" type="file" id="imgae" name="image">
+              <input class="form-control" type="file" id="imgae" name="imageEdit">
             </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-dark rounded-pill w-25">submit</button>

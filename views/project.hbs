@@ -48,7 +48,8 @@
 
     <!-- Start Project -->
     <div style="padding: 7%; width: 100%; height: 100%;">
-        <h1 style="text-align: center; font-weight: bold;">Dumbways Mobile App - 2021</h1>
+        {{#each myProjek}}
+        <h1 style="text-align: center; font-weight: bold;">{{this.name}}</h1>
         <div class="d-flex w-100% justify-content-between">
             <div class="w-100 d-flex justify-content-center align-items-center">
                 <img src="https://images.unsplash.com/photo-1480694313141-fce5e697ee25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="project" width="90%" height="90%">
@@ -56,7 +57,7 @@
             <div class="w-50 d-flex flex-column">
                 <div style="margin-top: 3rem; width: 70%;">
                     <h3 style="font-weight: bold;">Duration</h3>
-                    <h5 class="m-3 w-100"><i style="margin-right: 10px;" class="bi bi-calendar2-week-fill"></i> 12 Jan 2021 - 11 Feb 2021</h5>
+                    <h5 class="m-3 w-100"><i style="margin-right: 10px;" class="bi bi-calendar2-week-fill"></i> {{this.startDate}} - {{this.endDate}}</h5>
                     <h5 class="m-3 w-100"><i style="margin-right: 10px;" class="bi bi-clock"></i> 1 month</h5>
                 </div>
                 <div style="margin-top: 3rem; width: 70%;">
@@ -73,12 +74,13 @@
             </div>
         </div>
         <div style="font-size: 1rem; text-align: justify; padding: 0 3%;">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem aliquam repudiandae fugit consectetur minima neque sapiente alias nostrum temporibus. Suscipit autem in debitis, rem enim unde, culpa doloribus asperiores ipsum libero optio voluptatibus sint mollitia iusto. Quasi ipsum, minus obcaecati soluta nostrum vel aspernatur tempora deserunt amet quae veniam itaque delectus dignissimos corporis numquam exercitationem! Fugit recusandae enim voluptatem nulla tempore rem eos inventore? Ipsa, assumenda tenetur laboriosam ea aspernatur molestiae, obcaecati optio amet sequi tempora delectus quasi accusantium dignissimos atque voluptatem, quis debitis dolore maxime fugit repellat necessitatibus? Est eligendi voluptatem, exercitationem dolor reprehenderit tenetur perspiciatis corrupti reiciendis. Sunt?</p>
+            <p>{{this.desc}}</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem aliquam repudiandae fugit consectetur minima neque sapiente alias nostrum temporibus. Suscipit autem in debitis, rem enim unde, culpa doloribus asperiores ipsum libero optio voluptatibus sint mollitia iusto. Quasi ipsum, minus obcaecati soluta nostrum vel aspernatur tempora deserunt amet quae veniam itaque delectus dignissimos corporis numquam exercitationem! Fugit recusandae enim voluptatem nulla tempore rem eos inventore? Ipsa, assumenda tenetur laboriosam ea aspernatur molestiae, obcaecati optio amet sequi tempora delectus quasi accusantium dignissimos atque voluptatem, quis debitis dolore maxime fugit repellat necessitatibus? Est eligendi voluptatem, exercitationem dolor reprehenderit tenetur perspiciatis corrupti reiciendis. Sunt?</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem aliquam repudiandae fugit consectetur minima neque sapiente alias nostrum temporibus. Suscipit autem in debitis, rem enim unde, culpa doloribus asperiores ipsum libero optio voluptatibus sint mollitia iusto. Quasi ipsum, minus obcaecati soluta nostrum vel aspernatur tempora deserunt amet quae veniam itaque delectus dignissimos corporis numquam exercitationem! Fugit recusandae enim voluptatem nulla tempore rem eos inventore? Ipsa, assumenda tenetur laboriosam ea aspernatur molestiae, obcaecati optio amet sequi tempora delectus quasi accusantium dignissimos atque voluptatem, quis debitis dolore maxime fugit repellat necessitatibus? Est eligendi voluptatem, exercitationem dolor reprehenderit tenetur perspiciatis corrupti reiciendis. Sunt?</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem aliquam repudiandae fugit consectetur minima neque sapiente alias nostrum temporibus. Suscipit autem in debitis, rem enim unde, culpa doloribus asperiores ipsum libero optio voluptatibus sint mollitia iusto. Quasi ipsum, minus obcaecati soluta nostrum vel aspernatur tempora deserunt amet quae veniam itaque delectus dignissimos corporis numquam exercitationem! Fugit recusandae enim voluptatem nulla tempore rem eos inventore? Ipsa, assumenda tenetur laboriosam ea aspernatur molestiae, obcaecati optio amet sequi tempora delectus quasi accusantium dignissimos atque voluptatem, quis debitis dolore maxime fugit repellat necessitatibus? Est eligendi voluptatem, exercitationem dolor reprehenderit tenetur perspiciatis corrupti reiciendis. Sunt?</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem aliquam repudiandae fugit consectetur minima neque sapiente alias nostrum temporibus. Suscipit autem in debitis, rem enim unde, culpa doloribus asperiores ipsum libero optio voluptatibus sint mollitia iusto. Quasi ipsum, minus obcaecati soluta nostrum vel aspernatur tempora deserunt amet quae veniam itaque delectus dignissimos corporis numquam exercitationem! Fugit recusandae enim voluptatem nulla tempore rem eos inventore? Ipsa, assumenda tenetur laboriosam ea aspernatur molestiae, obcaecati optio amet sequi tempora delectus quasi accusantium dignissimos atque voluptatem, quis debitis dolore maxime fugit repellat necessitatibus? Est eligendi voluptatem, exercitationem dolor reprehenderit tenetur perspiciatis corrupti reiciendis. Sunt?</p>
         </div>
+        {{/each}}
     </div>
     <!-- End Project -->
 
