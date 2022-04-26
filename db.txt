@@ -1,0 +1,35 @@
+1. Catat data data yang akan disimpan
+- blog Projek
+    a. id
+    b. Name
+    c. Start Date
+    d. End Date
+    f. Duration
+    g. Desc
+    h. Techicon
+    i. Img
+
+2. Tentukan tipe data
+- blog Projek
+    a. id           : serial
+    b. Name         : character var
+    c. Start Date   : date
+    d. End Date     : date
+    f. Duration     : character
+    g. Desc         : text
+    h. Techicon     : character var
+    i. Img          : character var
+
+3. Tentukan panjang data dan nilai default
+- blog Projek
+    a. id           : serial
+    b. Name         : character var (100)
+    c. Start Date   : date
+    d. End Date     : date
+    f. Duration     : character (2)
+    g. Desc         : text
+    h. Techicon     : character var (100)
+    i. Img          : character var (100)
+
+4. Tentukan Primary key/ kunci utama
+id = serial

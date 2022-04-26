@@ -1,5 +1,7 @@
 const express = require("express");
 
+const db = require('./connection/db')
+
 const app = express();
 
 app.set('view engine', 'hbs');
@@ -9,19 +11,29 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended : false}));
 
 
-const projek = []
-
 app.get('/', function(req,res) {
-    
-    let myProjek = projek.map(function (data) {
-        return {
-            ...data,
-        }
+    let query = `SELECT * FROM tb_blogprojek;`
+
+    db.connect((err, client, done) => {
+        if (err) throw err
+
+        client.query(query, (err, result) => {
+            done()
+
+            if (err) throw err
+
+            let data = result.rows
+
+            data = data.map((projek) => {
+                return {
+                    ...projek,
+                }
+            })
+
+            res.render('index', { projek: data })
+        })
     })
-
-    res.render('index', { project: myProjek })
-});
-
+})
 app.get('/blog', function (req, res) {
     // console.log(blogs);
 
@@ -69,6 +81,19 @@ app.get('/add-projek', function(req,res) {
 
 // }
 
+app.get('/project/:id', function(req,res) {
+    let id = req.params.id
+
+    let myProjek = projek.map(function (data) {
+        return {
+            ...data,
+            dataId : id
+        }
+    })
+
+    res.render('project', {dataId: id, myProjek});
+})
+
 app.post('/add-projek', function(req,res) {
     let name = req.body.name
     let desc = req.body.desc
@@ -110,19 +135,6 @@ app.post('/add-projek', function(req,res) {
     res.redirect('/')
 });
 
-app.get('/project/:id', function(req,res) {
-    let id = req.params.id
-
-    let myProjek = projek.map(function (data) {
-        return {
-            ...data,
-            dataId : id
-        }
-    })
-
-    res.render('project', {dataId: id, myProjek});
-})
-
 app.get('/delete-projek/:id', function (req, res) {
     let id = req.params.id
 
@@ -141,7 +153,7 @@ app.get('/edit-projek/:id', function (req, res) {
         }
     })
 
-    res.render('edit-projek', { dataId: id, myProjek })
+    res.render('edit-projek', { dataId: id, myProjek})
 })
 
 app.post('/edit-projek/:id', function(req,res) {
