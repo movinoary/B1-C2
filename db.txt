@@ -33,3 +33,39 @@
 
 4. Tentukan Primary key/ kunci utama
 id = serial
+
+
+SELECT
+-- SELECT nama_kolom
+-- FROM nama_tabel
+
+UPDATE
+-- UPDATE nama_tabel
+-- SET nama_kolom_update = value_update
+-- WHERE kondisi (contoh {author='vino'})
+
+
+DELETE
+-- DELETE FORM nama_tabel
+-- WHERE kondisi (contoh {id = 1})
+
+
+app.get('/delete-projek/:id', function (req, res) {
+    let id = req.params.id
+
+    let query = `DELETE FROM public.tb_blogprojek WHERE id = ${id}`
+
+    db.connect((err, client, done) => {
+        if (err) throw err
+
+        client.query(query, (err, rows) => {
+            done()
+
+            if(!err) {
+                return res.redirect('/')
+            } else {
+                console.log(err)
+            }
+        })
+    })
+});
