@@ -117,6 +117,15 @@ app.post('/add-projek', function(req,res) {
     // } else{
     //     Math.ceil(days / 4) + 'bulan'; // Math.ceil(days / 30)
     // }
+    console.log(`
+    title        : ${name}, 
+    start        : ${startDate},
+    end          : ${endDate}
+    duration     : ${month} bulan,
+    desc         : ${desc}, 
+    technologies : ${techicon}, 
+    image        : ${image}
+    `)
 
     let query = `INSERT INTO public.tb_blogprojek(
         name, startdate, enddate, duration, "desc", techicon, img)
@@ -136,29 +145,14 @@ app.post('/add-projek', function(req,res) {
         })
     })
 
-    console.log(`
-    title        : ${name}, 
-    start        : ${startDate},
-    end          : ${endDate}
-    duration     : ${month} bulan,
-    desc         : ${desc}, 
-    technologies : ${techicon}, 
-    image        : ${image}
-    `)
-
-    // let project = {name, startDate, endDate, desc, techicon, image, month};
 
 
-    // projek.push(project);
-
-    // res.redirect('/')
 });
 
 app.get('/delete-projek/:id', function (req, res) {
     let id = req.params.id
 
-    let query = `DELETE FROM public.tb_blogprojek
-	WHERE id = ${id}`
+    let query = `DELETE FROM public.tb_blogprojek WHERE id = ${id}`
 
     db.connect((err, client, done) => {
         if (err) throw err
@@ -178,17 +172,30 @@ app.get('/delete-projek/:id', function (req, res) {
 app.get('/edit-projek/:id', function (req, res) {
     let id = req.params.id
 
-    let myProjek = projek.map(function (data) {
-        return {
-            ...data,
-            dataId : id
-        }
-    })
+    let query = `SELECT * FROM tb_blogprojek WHERE id = ${id}`
 
-    res.render('edit-projek', { dataId: id, myProjek})
+    db.connect((err, client, done) => {
+        if (err) throw err
+
+        client.query(query, (err, result) => {
+            done()
+
+            if (err) throw err
+
+            let data = result.rows
+
+            data = data.map((projek) => {
+                return {
+                    ...projek,
+                }
+            })
+
+            res.render('edit-projek', { projek: data })
+        })
+    })
 })
 
-app.post('/edit-projek', function(req,res) {
+app.post('/edit-projek/:id', function(req,res) {
     let id = req.params.id
     let name = req.body.nameEdit
     let desc = req.body.descEdit
@@ -223,12 +230,24 @@ app.post('/edit-projek', function(req,res) {
     image        : ${image}
     `);
 
-    let project = {id, name, startDate, endDate, desc, techicon, image, month};
+    let query = `
+    UPDATE public.tb_blogprojek
+	name=${name}, startdate=${startDate}, enddate=${endDate}, duration=${month}, "desc"=${desc}, techicon=${techicon}, img=${image}?
+	WHERE id=${id}`
 
-    projek.push(project);
-    projek.splice(id, 1);
+    db.connect((err, client, done) => {
+        if (err) throw err
 
-    res.redirect('/');
+        client.query(query, (err, rows) => {
+            done()
+
+            if(!err) {
+                res.redirect('/')
+            } else {
+                console.log(err)
+            }
+        })
+    })
 });
 
 const port = 4000
