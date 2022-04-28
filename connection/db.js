@@ -1,7 +1,7 @@
 const {Pool} = require('pg');
 
 const dbPool = new Pool({
-    database: 'myprojek',
+    database: 'bootcamp',
     port: 5432,
     user: 'postgres',
     password: 'root'

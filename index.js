@@ -23,26 +23,23 @@ app.get('/', function(req,res) {
             if (err) throw err
 
             let data = result.rows
+            let icon = []
 
             data = data.map((projek) => {
                 return {
                     ...projek,
+                    techicon : projek.techicon.split(',')
+                    
                 }
             })
+
+            console.log(data);
 
             res.render('index', { projek: data })
         })
     })
 })
 
-app.get('/blog', function (req, res) {
-    // console.log(blogs);
-
-    // map = akses indeks array
-    // spread opr = memanipulasi object setiap indeks
-
-    // console.log(dataBlogs);
-})
 
 app.get('/contact-me', function(req,res) {
     res.render('contact-me')
@@ -62,6 +59,7 @@ app.post('/contact-me', function(req,res) {
     subject : ${subject}, 
     message : ${message}
     `)
+    
 });
 
 app.get('/add-projek', function(req,res) {
@@ -85,14 +83,27 @@ app.get('/add-projek', function(req,res) {
 app.get('/project/:id', function(req,res) {
     let id = req.params.id
 
-    let myProjek = projek.map(function (data) {
-        return {
-            ...data,
-            dataId : id
-        }
-    })
+    let query = `SELECT * FROM tb_blogprojek WHERE id = ${id}`
 
-    res.render('project', {dataId: id, myProjek});
+    db.connect((err, client, done) => {
+        if (err) throw err
+
+        client.query(query, (err, result) => {
+            done()
+
+            if (err) throw err
+
+            let data = result.rows
+
+            data = data.map((projek) => {
+                return {
+                    ...projek,
+                }
+            })
+
+            res.render('project', { projek: data })
+        })
+    })
 })
 
 app.post('/add-projek', function(req,res) {
@@ -110,13 +121,14 @@ app.post('/add-projek', function(req,res) {
     const week = Math.ceil(days / 7);
     const month = Math.ceil(week / 4); // Math.ceil(days / 30)
 
-    // if(days <= 7) {
-    //     Math.floor(days) + 'hari'
-    // } else if(days <= 30){
-    //     Math.ceil(days / 7) + 'minggu';
-    // } else{
-    //     Math.ceil(days / 4) + 'bulan'; // Math.ceil(days / 30)
-    // }
+    if(days <= 7) {
+        Math.floor(days) + 'hari'
+    } else if(days <= 30){
+        Math.ceil(days / 7) + 'minggu';
+    } else{
+        Math.ceil(days / 4) + 'bulan'; // Math.ceil(days / 30)
+    }
+
     console.log(`
     title        : ${name}, 
     start        : ${startDate},
@@ -231,9 +243,9 @@ app.post('/edit-projek/:id', function(req,res) {
     `);
 
     let query = `
-    UPDATE public.tb_blogprojek
-	name=${name}, startdate=${startDate}, enddate=${endDate}, duration=${month}, "desc"=${desc}, techicon=${techicon}, img=${image}?
-	WHERE id=${id}`
+    UPDATE tb_blogprojek
+	SET	name='${name}', startdate='${startDate}', enddate='${endDate}', duration='${month}', "desc"='${desc}', techicon='${techicon}', img='${image}'
+	WHERE id='${id}'`
 
     db.connect((err, client, done) => {
         if (err) throw err
