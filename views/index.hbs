@@ -28,11 +28,32 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
+            {{#if isLogin}}
               <li class="nav-item">
                 <a class="nav-link" href="add-projek">Add Project</a>
               </li>
+            {{/if}}
             </ul>
             <div class="d-flex justify-content-end">
+                {{#if isLogin}}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link">Hello, {{user.nama}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">logout</a>
+                    </li>
+                </ul>
+                {{else}}
+                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="register">register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login">login</a>
+                    </li>
+                </ul>
+                {{/if}}
                 <a href="contact-me" style="
                     text-decoration: none;
                     color: #fff;
@@ -46,6 +67,11 @@
     </nav>
     <!-- End NavBar -->
 
+        {{#if messages.success}}
+            <div class="alert alert-success" role="alert" style="padding-top: 5rem;">
+            {{messages.success}}
+            </div>
+        {{/if}}
     <!-- Start Home profile -->
     <div class="w-100 d-flex justify-content-center align-items-center" style="background-color: #e6e6e6; height: 100vh;">
         <div class="d-flex align-items-center w-75 h-175" style="background-color: #fff; padding: 3rem; border-radius: 10px; box-shadow: 0 0 30px rgba(0,0,0,0.2);">

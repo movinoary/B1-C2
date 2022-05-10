@@ -1,6 +1,9 @@
 const express = require("express");
+const bcrypt = require('bcrypt');
+const flash = require('express-flash');
+const session = require('express-session');
 
-const db = require('./connection/db')
+const db = require('./connection/db');
 
 const app = express();
 
@@ -10,6 +13,21 @@ app.use('/public', express.static(__dirname + '/public'));
  
 app.use(express.urlencoded({ extended : false}));
 
+app.use(flash());
+
+app.use(
+    session({
+        cookie:{
+            httpOnly: true,
+            secure: false,
+            maxAge: null
+        },
+        store: new session.MemoryStore(),
+        saveUninitialized: true,
+        resave: false,
+        secret: 'secretValue'
+    })
+)
 
 app.get('/', function(req,res) {
     let query = `SELECT * FROM tb_blogprojek`
@@ -28,14 +46,19 @@ app.get('/', function(req,res) {
             data = data.map((projek) => {
                 return {
                     ...projek,
-                    techicon : projek.techicon.split(',')
+                    techicon : projek.techicon.split(','),
+                    isLogin : req.session.isLogin
                     
                 }
             })
 
-            console.log(data);
+            // console.log(data);
 
-            res.render('index', { projek: data })
+            res.render('index', { 
+                projek: data,
+                isLogin : req.session.isLogin,
+                user: req.session.user,
+            })
         })
     })
 })
@@ -261,6 +284,74 @@ app.post('/edit-projek/:id', function(req,res) {
         })
     })
 });
+
+app.get('/register', function(req,res) {
+    res.render('register')
+})
+
+app.post('/register', function(req,res) {
+    const {nama, email, password} = req.body
+
+    const hash = bcrypt.hashSync(password, 10)
+
+    db.connect((err, client, done) => {
+        if(err) throw err
+        
+        let query = `INSERT INTO tb_user(nama, email, password) VALUES ('${nama}', '${email}', '${hash}')`
+
+        client.query(query, (err, result) => {
+            done()
+            if(err) throw err
+            
+            res.render('login')
+        })
+    })
+})
+
+app.get('/login', function(req,res) {
+    res.render('login')
+})
+
+app.post('/login', function(req,res) {
+    const { email, password} = req.body
+
+    db.connect((err, client, done) => {
+        if(err) throw err
+
+        let query = `SELECT * FROM tb_user WHERE email='${email}'`
+
+        client.query(query, (err, result) => {
+            done()
+            if(err) throw err
+
+            if(result.rowCount == 0){
+                req.flash('danger', 'akun tidak ditemukan')
+                return res.redirect('login')
+            }
+
+            let isMatch = bcrypt.compareSync(password, result.rows[0].password)
+
+            if(isMatch) {
+                req.session.isLogin = true
+                req.session.user = {
+                    id : result.rows[0].id,
+                    email : result.rows[0].email,
+                    nama : result.rows[0].nama,
+                }
+                req.flash('success', 'login sukses')
+                res.redirect('/')
+            } else {
+                req.flash('danger', 'password tidak ditemukan')
+                res.redirect('/login')
+            }
+        })
+    })
+})
+
+app.get('/logout', function (req, res) {
+    req.session.destroy()
+    res.redirect('/home')
+})
 
 const port = 4000
 app.listen(port, function(){

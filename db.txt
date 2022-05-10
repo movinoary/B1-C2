@@ -9,6 +9,12 @@
     h. Techicon
     i. Img
 
+- account
+    a. id
+    b. name
+    c. e-mail
+    d. password
+
 2. Tentukan tipe data
 - blog Projek
     a. id           : serial
@@ -19,6 +25,12 @@
     g. Desc         : text
     h. Techicon     : character var
     i. Img          : character var
+
+- account
+    a. id           : serial
+    b. name         : character var
+    c. e-mail       : character var
+    d. password     : character var
 
 3. Tentukan panjang data dan nilai default
 - blog Projek
@@ -31,10 +43,22 @@
     h. Techicon     : character var (100)
     i. Img          : character var (100)
 
+- account
+    a. id           : Serial
+    b. name         : character var (255)
+    c. e-mail       : character var (255)
+    d. password     : character var (255)
+
 4. Tentukan Primary key/ kunci utama
-id = serial
+- blog projek
+    id = serial
+
+- account
+    id = serial
 
 
+
+// Catatan
 SELECT
 -- SELECT nama_kolom
 -- FROM nama_tabel
