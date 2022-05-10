@@ -68,7 +68,7 @@
     <!-- Start Contact Me -->
     <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; height: 100vh; background-color: #e6e6e6; padding: 7%;">
         <h1 style="text-align: center; margin: 1rem 0; font-weight: bold; text-transform: uppercase;">Add my project</h1>
-        <form class="d-flex flex-column justify-content-center w-50" method="post">
+        <form class="d-flex flex-column justify-content-center w-50" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
               <lable style="font-weight: bold;" for="name" class="form-label">Project Name</lable>
               <input type="text" class="form-control" id="name" name="name">
@@ -91,28 +91,28 @@
                 <label style="font-weight: bold;" for="technologies" class="form-label">Technologies</label>
                 <div class="d-flex">
                     <div class="form-check form-check-inline w-50">
-                      <input class="form-check-input" type="checkbox" id="nodejs" value="fa-brands fa-node-js" name="techicon">
+                      <input class="form-check-input" type="checkbox" id="nodejs" value="node js" name="techicon">
                       <label style="font-weight: bold;" class="form-check-label" for="nodejs">Node JS</label>
                     </div>
                     <div class="form-check form-check-inline w-50">
-                      <input class="form-check-input" type="checkbox" id="nextjs" value="fa-brands fa-node-js" name="techicon">
+                      <input class="form-check-input" type="checkbox" id="nextjs" value="nextjs" name="techicon">
                       <label style="font-weight: bold;" class="form-check-label" for="nextjs">Next JS</label>
                     </div>
                 </div>
                 <div class="d-flex">
                     <div class="form-check form-check-inline w-50">
-                      <input class="form-check-input" type="checkbox" id="ReactJs" value="fa-brands fa-react" name="techicon">
+                      <input class="form-check-input" type="checkbox" id="ReactJs" value="react js" name="techicon">
                       <label style="font-weight: bold;" class="form-check-label" for="ReactJs">React Js</label>
                     </div>
                     <div class="form-check form-check-inline w-50">
-                      <input class="form-check-input" type="checkbox" id="typescript" value="fa-brands fa-js-square" name="techicon">
+                      <input class="form-check-input" type="checkbox" id="typescript" value="typescript" name="techicon">
                       <label style="font-weight: bold;" class="form-check-label" for="typescript">TypeScript</label>
                     </div>
                 </div>
             </div>
             <div class="mb-3">
               <label style="font-weight: bold;" for="image" class="form-label">Upload Image</label>
-              <input class="form-control" type="file" id="imgae" name="image">
+              <input class="form-control" type="file" name='image'>
             </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-dark rounded-pill w-25">submit</button>

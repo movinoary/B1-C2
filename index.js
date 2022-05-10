@@ -4,12 +4,14 @@ const flash = require('express-flash');
 const session = require('express-session');
 
 const db = require('./connection/db');
+const upload = require("./middleware/uploadFile");
 
 const app = express();
 
 app.set('view engine', 'hbs');
 
 app.use('/public', express.static(__dirname + '/public'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
  
 app.use(express.urlencoded({ extended : false}));
 
@@ -30,7 +32,19 @@ app.use(
 )
 
 app.get('/', function(req,res) {
-    let query = `SELECT * FROM tb_blogprojek`
+    let query = ''
+    if (req.session.isLogin) {
+        query = `SELECT name, startdate, enddate, duration, "desc", techicon, img, id_user, email, nama
+                        FROM tb_user
+                        INNER JOIN tb_blogprojek
+                        ON tb_blogprojek.id_user = tb_user.id
+                        WHERE id_user=${req.session.user.id}`
+    } else {
+        query = `SELECT name, startdate, enddate, duration, "desc", techicon, img, id_user, email, nama
+                    FROM tb_user
+                    INNER JOIN tb_blogprojek
+                    ON tb_blogprojek.id_user = tb_user.id`
+    }
 
     db.connect((err, client, done) => {
         if (err) throw err
@@ -41,7 +55,6 @@ app.get('/', function(req,res) {
             if (err) throw err
 
             let data = result.rows
-            let icon = []
 
             data = data.map((projek) => {
                 return {
@@ -65,7 +78,10 @@ app.get('/', function(req,res) {
 
 
 app.get('/contact-me', function(req,res) {
-    res.render('contact-me')
+    res.render('contact-me', { 
+        isLogin : req.session.isLogin,
+        user: req.session.user,
+    })
 });
 
 app.post('/contact-me', function(req,res) {
@@ -86,27 +102,30 @@ app.post('/contact-me', function(req,res) {
 });
 
 app.get('/add-projek', function(req,res) {
-    res.render('add-projek')
+    res.render('add-projek', { 
+        isLogin : req.session.isLogin,
+        user: req.session.user,
+    })
 });
 
-
-// function addDuration (req, res) {
-
-
-//     if(days <= 7){
-//         return days + 'days'
-//     } else if(days <= 30) {
-//         return week + 'week'
-//     } else {
-//         return  month + 'month'
-//     }
-
-// }
 
 app.get('/project/:id', function(req,res) {
     let id = req.params.id
 
-    let query = `SELECT * FROM tb_blogprojek WHERE id = ${id}`
+    let query = ''
+    if (req.session.isLogin) {
+        query = `SELECT name, startdate, enddate, duration, "desc", techicon, img, id_user, email, nama
+                        FROM tb_user
+                        INNER JOIN tb_blogprojek
+                        ON tb_blogprojek.id_user = tb_user.id
+                        WHERE tb_blogprojek.id = ${id}`
+    } else {
+        query = `SELECT name, startdate, enddate, duration, "desc", techicon, img, id_user, email, nama
+                    FROM tb_user
+                    INNER JOIN tb_blogprojek
+                    ON tb_blogprojek.id_user = tb_user.id
+                    WHERE tb_blogprojek.id = ${id}`
+    }
 
     db.connect((err, client, done) => {
         if (err) throw err
@@ -124,16 +143,21 @@ app.get('/project/:id', function(req,res) {
                 }
             })
 
-            res.render('project', { projek: data })
+            res.render('project', { 
+                projek: data,
+                isLogin : req.session.isLogin,
+                user: req.session.user,
+            })
         })
     })
 })
 
-app.post('/add-projek', function(req,res) {
+app.post('/add-projek',upload.single('image'), function(req,res) {
+    let idUser = req.session.user.id
     let name = req.body.name
     let desc = req.body.desc
     let techicon = req.body.techicon
-    let image = req.body.image
+    let image =  req.file.filename
     let startDate = req.body.startdate
     let endDate = req.body.enddate
 
@@ -162,9 +186,16 @@ app.post('/add-projek', function(req,res) {
     image        : ${image}
     `)
 
+    
+    // if(techicon == nodejs){
+    //     element.innerHTML = `<i style="margin-right: 13px;" class="fa-brands fa-node-js"></i>`;
+    // } else if (techicon == reactjs){
+    //         element.innerHTML = `<i style="margin-right: 13px;" class="fa-brands fa-react"></i>`;
+    // }
+
     let query = `INSERT INTO public.tb_blogprojek(
-        name, startdate, enddate, duration, "desc", techicon, img)
-        VALUES ( '${name}', '${startDate}', '${endDate}', '${month}', '${desc}', '${techicon}', '${image}');`
+        name, startdate, enddate, duration, "desc", techicon, img, id_user)
+        VALUES ( '${name}', '${startDate}', '${endDate}', '${month}', '${desc}', '${techicon}', '${image}', '${idUser}');`
 
     db.connect((err, client, done) => {
         if (err) throw err
@@ -187,7 +218,7 @@ app.post('/add-projek', function(req,res) {
 app.get('/delete-projek/:id', function (req, res) {
     let id = req.params.id
 
-    let query = `DELETE FROM public.tb_blogprojek WHERE id = ${id}`
+    let query = `DELETE FROM tb_blogprojek WHERE id = ${id}`
 
     db.connect((err, client, done) => {
         if (err) throw err
@@ -204,10 +235,15 @@ app.get('/delete-projek/:id', function (req, res) {
     })
 });
 
+
 app.get('/edit-projek/:id', function (req, res) {
     let id = req.params.id
 
-    let query = `SELECT * FROM tb_blogprojek WHERE id = ${id}`
+    let query = `SELECT name, startdate, enddate, duration, "desc", techicon, img, id_user, email
+                FROM tb_user
+                INNER JOIN tb_blogprojek
+                ON tb_blogprojek.id_user = tb_user.id
+                WHERE tb_blogprojek.id=${id}`
 
     db.connect((err, client, done) => {
         if (err) throw err
@@ -225,17 +261,21 @@ app.get('/edit-projek/:id', function (req, res) {
                 }
             })
 
-            res.render('edit-projek', { projek: data })
+            res.render('edit-projek', { 
+                projek: data,
+                isLogin : req.session.isLogin,
+                user: req.session.user,
+             })
         })
     })
 })
 
-app.post('/edit-projek/:id', function(req,res) {
+app.post('/edit-projek/:id',upload.single('image'), function(req,res) {
     let id = req.params.id
     let name = req.body.nameEdit
     let desc = req.body.descEdit
     let techicon = req.body.techiconEdit
-    let image = req.body.imageEdit
+    let image = req.file.filename
     let startDate = req.body.startdateEdit
     let endDate = req.body.enddateEdit
 
@@ -303,7 +343,7 @@ app.post('/register', function(req,res) {
             done()
             if(err) throw err
             
-            res.render('login')
+            res.redirect('/login')
         })
     })
 })
@@ -350,7 +390,7 @@ app.post('/login', function(req,res) {
 
 app.get('/logout', function (req, res) {
     req.session.destroy()
-    res.redirect('/home')
+    res.redirect('/')
 })
 
 const port = 4000

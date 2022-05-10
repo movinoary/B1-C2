@@ -70,7 +70,7 @@
     <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; height: 100%; background-color: #e6e6e6; padding: 7%;">
         {{#each projek}}
         <h1 style="text-align: center; margin: 1rem 0; font-weight: bold; text-transform: uppercase;">Edit my project</h1>
-        <form class="d-flex flex-column justify-content-center w-50" method="post">
+        <form class="d-flex flex-column justify-content-center w-50" method="post" enctype="multipart/form-data">
             <div class="mb-3">
               <lable style="font-weight: bold;" for="name" class="form-label">Project Name</lable>
               <input type="text" class="form-control" id="name" name="nameEdit" value={{this.name}}>
@@ -113,8 +113,8 @@
                 </div>
             </div>
             <div class="mb-3">
-              <label style="font-weight: bold;" for="image" class="form-label">Upload Image</label>
-              <input class="form-control" type="file" id="imgae" name="imageEdit">
+              <label style="font-weight: bold;" for="image" class="form-label">Upload File</label>
+              <input class="form-control" type="file" name="image">
             </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-dark rounded-pill w-25">submit</button>

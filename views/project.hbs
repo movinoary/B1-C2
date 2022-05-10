@@ -28,11 +28,23 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
+            {{#if isLogin}}
               <li class="nav-item">
                 <a class="nav-link" href="add-projek">Add Project</a>
               </li>
+            {{/if}}
             </ul>
             <div class="d-flex justify-content-end">
+                {{#if isLogin}}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link">Hello, {{user.nama}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">logout</a>
+                    </li>
+                </ul>
+                {{else}}
                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="register">register</a>
@@ -41,6 +53,7 @@
                         <a class="nav-link" href="login">login</a>
                     </li>
                 </ul>
+                {{/if}}
                 <a href="contact-me" style="
                     text-decoration: none;
                     color: #fff;
@@ -60,7 +73,7 @@
         <h1 style="text-align: center; font-weight: bold;">{{this.name}}</h1>
         <div class="d-flex w-100% justify-content-between">
             <div class="w-100 d-flex justify-content-center align-items-center">
-                <img src="https://images.unsplash.com/photo-1480694313141-fce5e697ee25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="project" width="90%" height="90%">
+                <img src="/uploads/{{this.img}}" alt="project" width="90%" height="500px">
             </div>
             <div class="w-50 d-flex flex-column">
                 <div style="margin-top: 3rem; width: 70%;">
@@ -71,12 +84,13 @@
                 <div style="margin-top: 3rem; width: 70%;">
                     <h3 style="font-weight: bold;">Technologies</h3>
                     <div class="d-flex">
-                        <h5 class="m-3 w-100"><i style="margin-right: 10px;" class="fa-brands fa-react"></i> React JS</h5>
-                        <h5 class="m-3 w-100"><i style="margin-right: 10px;" class="fa-brands fa-js-square"></i> JavaScript</h5>
+                        <p>{{this.techicon}}</p>
                     </div>
+                </div>
+                <div style="margin-top: 3rem; width: 70%;">
+                    <h3 style="font-weight: bold;">Creating</h3>
                     <div class="d-flex">
-                        <h5 class="m-3 w-100"><i style="margin-right: 10px;" class="fa-brands fa-node-js"></i> Node Js</h5>
-                        <h5 class="m-3 w-100"><i style="margin-right: 10px;" class="fa-brands fa-bootstrap"></i> Bootstrap</h5>
+                        <p>{{this.nama}}</p>
                     </div>
                 </div>
             </div>
