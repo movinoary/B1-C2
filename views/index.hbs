@@ -79,20 +79,33 @@
                 <h2 class="fs-1 m-1">Hi Welcome to my hut</h2>
                 <p style="text-align: justify; width: 90%; margin: 2rem 0;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error architecto, provident voluptatem facere, consequatur eligendi laboriosam a eos possimus corporis pariatur. Voluptate, deleniti ipsa cumque voluptatum voluptatibus velit provident fugiat asperiores esse, consequatur ducimus dolores maiores animi est. Nisi necessitatibus debitis earum accusantium totam quasi nobis eveniet quos, doloribus similique ratione inventore. Cum quia, expedita qui quae, similique iusto sapiente, nulla voluptate vitae ducimus optio. Distinctio fugiat obcaecati sit, laboriosam veritatis eum repudiandae! Eligendi, dolor. Eveniet fugit praesentium, laudantium cupiditate, in neque eos debitis voluptas eaque voluptate rem necessitatibus cum, magnam soluta suscipit esse! Molestias alias quidem odio rerum ratione.</p>
                 <div class="d-flex align-items-center" style="margin: 2rem 0;">
-                    <button style="padding: 5px 30px; background-color: #151515; color: #fff; border: none; border-radius: 20px;margin-right: 20px;">contact</button>
+                    <a href="/contact-me">
+                        <button style="padding: 5px 30px; background-color: #151515; color: #fff; border: none; border-radius: 20px;margin-right: 20px;">contact</button>
+                    </a>
                     <button style="background-color: #fff; color: #151515; border: none;">download CV<i class="bi bi-download" style="margin-left: 10px;"></i></button>
                 </div>
                 <div class="d-flex m-3 fs-4">
-                    <i style="padding: 1px 6px 2px 6px; background-color: #151515; color: #fff; border-radius: 50%;" class="m-2 bi bi-linkedin"></i>
-                    <i style="padding: 1px 6px 2px 6px; background-color: #151515; color: #fff; border-radius: 50%;" class="m-2 bi bi-instagram"></i>
-                    <i style="padding: 1px 6px 2px 6px; background-color: #151515; color: #fff; border-radius: 50%;" class="m-2 bi bi-facebook"></i>
-                    <i style="padding: 1px 6px 2px 6px; background-color: #151515; color: #fff; border-radius: 50%;" class="m-2 bi bi-twitter"></i>
+                    <a href="https://id.linkedin.com/" target="_blank">
+                        <i style="padding: 1px 6px 2px 6px; background-color: #151515; color: #fff; border-radius: 50%;" class="m-2 bi bi-linkedin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <i style="padding: 1px 6px 2px 6px; background-color: #151515; color: #fff; border-radius: 50%;" class="m-2 bi 
+                        bi-instagram"></i>
+                    </a>
+                    <a href="https://id-id.facebook.com/" target="_blank">
+                        <i style="padding: 1px 6px 2px 6px; background-color: #151515; color: #fff; border-radius: 50%;" class="m-2 bi 
+                        bi-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/" target="_blank">
+                        <i style="padding: 1px 6px 2px 6px; background-color: #151515; color: #fff; border-radius: 50%;" class="m-2 bi 
+                        bi-twitter"></i>
+                    </a>
                 </div>
             </div>
             <div class="card text-center" style="width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.3); overflow: hidden; border-radius: 10px;">
-                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="profile" width="100%" height="400px">
+                <img src="https://i.pinimg.com/564x/d7/fa/60/d7fa60c3f095b3e40e8a59f59cebc3f4.jpg" alt="profile" width="100%" height="400px">
                     <div class="card-body">
-                        <h3 class="card-title">Rhoma Irama</h3>
+                        <h3 class="card-title">Irene</h3>
                         <p class="card-text">Fullstack developer</p>
                     </div>
                 </img>
@@ -106,12 +119,12 @@
         <h1 style="text-align: center; margin: 1rem 0; font-weight: bold; text-transform: uppercase;">My Project</h1>
         <div class="d-flex justify-content-start flex-wrap">
             {{#each projek}}
-            <div class="card rounded-3" style="width: 400px; height: 100%; padding: 0.5rem; margin: 1rem 1.3rem;">
+            <div class="card rounded-3" style="width: 400px; height: 30rem; padding: 0.5rem; margin: 1rem 1.3rem;">
                 <img class="rounded-3" src="/uploads/{{this.img}}" alt="project" width="100%" height="300px">
                 <div class="card-body">
-                    <a href="/project/{{this.id}}" style="text-decoration: none; color: #151515;">
+                    <a href='/project/{{this.id}}' style="text-decoration: none; color: #151515;">
                         <h6 class="card-title">{{this.name}}</h6>
-                        <p style="font-size: 0.8rem; color: #5a5a5a;">Durasi :{{this.duration}} bulan || {{this.nama}}</p>
+                        <p style="font-size: 0.8rem; color: #5a5a5a;">Durasi    :{{this.duration}} bulan || Create by : {{this.nama}} || {{this.id}}</p>
                         <p class="card-text" style="font-size: 1rem; text-align: justify;">{{this.desc}}</p>
                         <div class="d-flex fs-2">
                             <p>{{this.techicon}}</p>

@@ -59,6 +59,7 @@ app.get('/', function(req,res) {
             data = data.map((projek) => {
                 return {
                     ...projek,
+                    id : projek.id,
                     techicon : projek.techicon.split(','),
                     isLogin : req.session.isLogin
                     
@@ -112,20 +113,11 @@ app.get('/add-projek', function(req,res) {
 app.get('/project/:id', function(req,res) {
     let id = req.params.id
 
-    let query = ''
-    if (req.session.isLogin) {
-        query = `SELECT name, startdate, enddate, duration, "desc", techicon, img, id_user, email, nama
-                        FROM tb_user
-                        INNER JOIN tb_blogprojek
-                        ON tb_blogprojek.id_user = tb_user.id
-                        WHERE tb_blogprojek.id = ${id}`
-    } else {
-        query = `SELECT name, startdate, enddate, duration, "desc", techicon, img, id_user, email, nama
+    let query = `SELECT tb_blogprojek.id, name, startdate, enddate, duration, "desc", techicon, img, id_user, email, nama
                     FROM tb_user
                     INNER JOIN tb_blogprojek
                     ON tb_blogprojek.id_user = tb_user.id
                     WHERE tb_blogprojek.id = ${id}`
-    }
 
     db.connect((err, client, done) => {
         if (err) throw err
@@ -140,6 +132,8 @@ app.get('/project/:id', function(req,res) {
             data = data.map((projek) => {
                 return {
                     ...projek,
+                    // dateStart : getTime(projek.startdate),
+                    // dateEnd : new Date(projek.enddate),
                 }
             })
 
@@ -397,3 +391,75 @@ const port = 4000
 app.listen(port, function(){
     console.log(`Server running on port : ${port}`)
 });
+
+
+
+function getTime(){
+    let dateTime = new Date();
+
+    let months = dateTime.getMonth();
+    let days = dateTime.getDay();
+
+    switch (months) {
+        case 0: 
+            months = 'January';
+            break;
+        case 1: 
+            months = 'February';
+            break;
+        case 2: 
+            days = 'March';
+            break;
+        case 3: 
+            months = 'April';
+            break;
+        case 4: 
+            months = 'May';
+            break;
+        case 5: 
+            months = 'June';
+            break;
+        case 6: 
+            months = 'July';
+            break;
+        case 7: 
+            months = 'August';
+            break;
+        case 8: 
+            months = 'September';
+            break;
+        case 9: 
+            months = 'October';
+            break;
+        case 10: 
+            months = 'November';
+            break;
+        case 11: 
+            months = 'December';
+            break;
+    };
+
+    switch (days) {
+        case 0: 
+            days = 'Sunday';
+            break;
+        case 1: 
+            days = 'Monday';
+            break;
+        case 2: 
+            days = 'Tuesday';
+            break;
+        case 3: 
+            days = 'Wesnesday';
+            break;
+        case 4: 
+            days = 'Thuesday';
+            break;
+        case 5: 
+            days = 'Friday';
+            break;
+        case 6: 
+            days = 'Saturday';
+            break;
+    };
+}
